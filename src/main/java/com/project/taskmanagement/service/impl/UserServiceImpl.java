@@ -5,6 +5,7 @@ import com.project.taskmanagement.converter.TaskConverter;
 import com.project.taskmanagement.converter.UserConverter;
 import com.project.taskmanagement.dto.UserDTO;
 import com.project.taskmanagement.dto.TaskDTO;
+import com.project.taskmanagement.entity.TaskEntity;
 import com.project.taskmanagement.entity.UserEntity;
 import com.project.taskmanagement.exception.BusinessException;
 import com.project.taskmanagement.exception.ErrorModel;
@@ -43,12 +44,34 @@ public class UserServiceImpl implements UserService {
     public List<UserDTO> getAllUsers() {
         List<UserEntity> userEntities = userRepository.findAll();
         return userEntities.stream()
-                .map(UserConverter::convertToDTO)
+                 .map(userEntity -> {
+                    List<TaskEntity> taskEntities = userEntity.getAssignedTasks();
+                    List<TaskDTO> dtoList = taskEntities.stream()
+                    .map(TaskConverter::convertToDTO)
+                    .collect(Collectors.toList());
+                    UserDTO convertToDTO = UserConverter.convertToDTO(userEntity);
+                    convertToDTO.setAssignedTasks(dtoList);
+                    return convertToDTO;
+                })
                 .collect(Collectors.toList());
     }
 
+//      public List<TaskDTO> getAllTasks() {
+//         List<TaskEntity> taskEntities = taskRepository.findAll();
+//         return taskEntities.stream()
+//                 .map(taskEntity -> {
+//                    List<UserEntity> userEntities = taskEntity.getAssignedUsers();
+//                    List<UserDTO> dtoList = userEntities.stream()
+//                    .map(UserConverter::convertToDTO)
+//                    .collect(Collectors.toList());
+//                    TaskDTO convertToDTO = TaskConverter.convertToDTO(taskEntity);
+//                    convertToDTO.setAssignedUsers(dtoList);
+// return convertToDTO;
+//                 })
+//                 .collect(Collectors.toList());
+//     }
 
-    
+
 
     @Override
     public UserDTO createUser(UserDTO userDTO) {
