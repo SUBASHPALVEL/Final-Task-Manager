@@ -1,9 +1,5 @@
 package com.project.taskmanagement.controller;
 
-import org.springframework.stereotype.Component;
-
-import org.springframework.stereotype.Component;
-
 import com.project.taskmanagement.dto.TaskDTO;
 import com.project.taskmanagement.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +34,7 @@ public class TaskController {
         return new ResponseEntity<>(taskDTOList, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping(consumes = "application/json")
     public ResponseEntity<TaskDTO> createTask(@RequestBody TaskDTO taskDTO) {
         TaskDTO createdTaskDTO = taskService.createTask(taskDTO);
         return new ResponseEntity<>(createdTaskDTO, HttpStatus.CREATED);
