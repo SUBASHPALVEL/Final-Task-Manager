@@ -2,7 +2,9 @@
 package com.project.taskmanagement.service.impl;
 
 import com.project.taskmanagement.converter.TaskConverter;
+import com.project.taskmanagement.converter.UserConverter;
 import com.project.taskmanagement.dto.TaskDTO;
+import com.project.taskmanagement.dto.UserDTO;
 import com.project.taskmanagement.entity.Priority;
 import com.project.taskmanagement.entity.Status;
 import com.project.taskmanagement.entity.TaskEntity;
@@ -38,8 +40,17 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<TaskDTO> getAllTasks() {
         List<TaskEntity> taskEntities = taskRepository.findAll();
+        
         return taskEntities.stream()
-                .map(TaskConverter::convertToDTO)
+                .map(taskEntity -> {
+                   List<UserEntity> userEntities = taskEntity.getAssignedUsers();
+                   List<UserDTO> dtoList = userEntities.stream()
+                   .map(UserConverter::convertToDTO)
+                   .collect(Collectors.toList());
+                   TaskDTO convertToDTO = TaskConverter.convertToDTO(taskEntity);
+                   convertToDTO.setAssignedUsers(dtoList);
+return convertToDTO;
+                })
                 .collect(Collectors.toList());
     }
 

@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.project.taskmanagement.entity.Priority;
 import com.project.taskmanagement.entity.Status;
-import com.project.taskmanagement.entity.UserEntity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -41,5 +40,5 @@ public class TaskDTO {
 
     private LocalDate completedDate;
 
-    private List<UserEntity> assignedUsers;
+    private List<UserDTO> assignedUsers;
 }

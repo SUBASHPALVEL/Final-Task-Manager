@@ -18,7 +18,8 @@ public class TaskConverter {
         taskEntity.setDueDate(taskDTO.getDueDate());
         taskEntity.setCreatedDate(taskDTO.getCreatedDate());
         taskEntity.setCompletedDate(taskDTO.getCompletedDate());
-        taskEntity.setAssignedUsers(taskDTO.getAssignedUsers());
+       // taskEntity.setAssignedUsers(taskDTO.getAssignedUsers());
+       
         return taskEntity;
     }
 
