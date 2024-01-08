@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks by User</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/tasklist.css}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Tasks assigned to User</h2>
+
+    <table class="task-table">
+        <thead>
+            <tr>
+                <th>Task ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Due Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="task : ${tasks}">
+                <td th:text="${task.taskId}"></td>
+                <td th:text="${task.title}"></td>
+                <td th:text="${task.description}"></td>
+                <td th:text="${task.status}"></td>
+                <td th:text="${task.priority}"></td>
+                <td th:text="${task.dueDate}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

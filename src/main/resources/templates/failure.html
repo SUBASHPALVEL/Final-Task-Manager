@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <script src="/js/login.js" defer></script>
+</head>
+<body>
+
+<h2>FAILURE</h2>
+
+<h1>Login Failed</h1>
+    <!-- You can access the errorList information if needed -->
+    <ul>
+        <li th:each="errorModel : ${errorList}" th:text="${errorModel.message}"></li>
+    </ul>
+
+
+</body>
+</html>
