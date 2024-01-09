@@ -14,7 +14,6 @@ import com.project.taskmanagement.repository.UserRepository;
 import com.project.taskmanagement.service.TaskService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
